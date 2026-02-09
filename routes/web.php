@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PriceAlertController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/alerts', [PriceAlertController::class, 'index'])->name('alerts.index');
+    Route::get('/alerts/create', [PriceAlertController::class, 'create'])->name('alerts.create');
+    Route::post('/alerts', [PriceAlertController::class, 'store'])->name('alerts.store');
 });
 
 require __DIR__.'/auth.php';
